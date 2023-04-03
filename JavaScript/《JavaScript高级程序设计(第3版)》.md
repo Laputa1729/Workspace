@@ -1,0 +1,139 @@
+# 《JavaScript 高级程序设计(第 3 版)》
+
+## 第 2 章
+
+-   `<script>`标签属性
+
+    -   `defer`: 等待 DOM 完全构建，后台下载，延迟执行。保持先后顺序。
+    -   `async`: 不阻塞 DOM 构建，加载完立即执行。不保证先后顺序。
+
+## 第 3 章
+
+-   基本数据类型`null`，表示一个 **_空对象指针_**
+    -   `typeof null;  // 'object'`
+    -   定义变量准备将来保存对象时，最好初始化为`null`
+        > `var obj = null;`
+-   特殊数值`NaN`，**_Not a Number_**
+
+-   自增/自减
+
+    ```javascript
+    var counter = 1;
+    var a = ++counter; // a: 2
+    ```
+
+    ```javascript
+    var counter = 1;
+    var a = counter++; // a: 1
+    ```
+
+-   字符串比大小
+    -   实际比较的是字符对应的**字符编码值**
+    -   大写字母的字符编码全部小于小写字母
+    ```javascript
+    var result = 'Brick' < 'alphabet'; // true
+    ```
+    ```javascript
+    var result = 'Brick'.toLowerCase() < 'alphabet'.toLowerCase(); // false
+    ```
+
+## 第 4 章
+
+-   参数是函数的**局部变量**
+-   `typeof` 检测基本数据类型倒是得力，对于引用类型的值，这个操作符用处就不大了
+-   基本类型的值保存在 => 栈
+-   引用类型的值保存在 => 堆
+    -   复制引用类型的值，复制的其实是指针，因此两个变量最终都指向同一个对象。
+
+## 第 5 章 引用类型
+
+### Object
+
+### Array
+
+-   `sort()`
+
+    -   会调用每个数组元素的 `toString()` 转型方法，再比较得到的字符串，以此来排序。
+
+    ```javascript
+    var arr = [0, 1, 5, 10, 15];
+    arr.sort();
+    console.log(arr); // [0, 1, 10, 15, 5]
+    ```
+
+    -   接收函数，自定义比较
+
+    ```javascript
+    // 升序 asc （要降序 desc，交换返回值即可）
+    var arr = [0, 1, 5, 10, 15];
+    arr.sort(function (item1, item2) {
+        if (item1 > item2) {
+            return 1; // 换位置
+        } else if (item1 < item2) {
+            return -1; // 不换
+        } else {
+            return 0; // 不换
+        }
+    });
+    console.log(arr); // [0, 1, 10, 15, 5]
+    ```
+
+    -   数值类型，或 `valueOf()` 方法返回值是数值类型的对象，简化：
+
+    ```javascript
+    // 降序 desc
+    var arr = [0, 1, 5, 10, 15];
+    arr.sort(function (item1, item2) {
+        return item2 - item1;
+    });
+    console.log(arr); // [15, 10, 5, 1, 0]
+    ```
+
+-   `slice()`
+
+    ```javascript
+    var arr = [0, 1, 5, 10, 15];
+    var newArr1 = arr.slice(1); // [1, 5, 10, 15]
+    var newArr2 = arr.slice(1, 4); // [1, 5, 10] 不包括第4项
+    ```
+
+    -   **如果参数是负数，用数组长度加上这个参数，以此来确定相应的位置：**
+        ```javascript
+        var newArr3 = arr.slice(-2, -1); // [10]
+        ```
+        -   `arr.length + (-2) = 3`
+        -   `arr.length + (-1) = 4`
+        -   `arr.slice(-2, -1) => arr.slice(3, 4)`
+
+-   ★`splice`
+    -   删除
+        -   `arr.splice(0, 2)` 从第`0`位开始，删除`2`个
+    -   插入
+        -   `arr.splice(2, 0, n1, n2, n3……)` 从第 `2` 位开始，`0`(表示不删东西)，插入多项
+    -   替换
+        -   `arr.splice(2, 1, n1, n2, n3……)` 把第`2`位的项，替换成别的项
+
+#### 遍历方法
+
+-   `Array.every(function(item, index, array) {})`
+    -   **“且”**
+    -   每一项都符合条件，返回 `true`，否则返回 `false`。
+    -   某一项不满足，`return false`，剩余项不再检测。
+-   `Array.some(function(item, index, array) {})`
+    -   **“或”**
+    -   每一项都未符合条件，返回 `false`。
+    -   某一项满足，`return true`，剩余项不再检测。
+-   `Array.filter(function(item, index, array) {})`
+    -   筛出符合条件的项，返回新数组。
+-   `Array.map(function(item, index, array) {})`
+    -   对每一项进行加工，返回新数组。
+-   `Array.forEach(function(item, index, array) {})`
+    -   没有返回值。
+-   `Array.reduce(function(prev, cur, curIndex, array) {}, initialValue)`
+    -   返回计算结果。
+
+### Date
+
+```javascript
+Date.now() === +new Date(); // true
+```
