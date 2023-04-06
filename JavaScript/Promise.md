@@ -1,4 +1,4 @@
-# Promise
+# 构造函数 Promise
 
 ## forEach 中异步任务的执行
 
