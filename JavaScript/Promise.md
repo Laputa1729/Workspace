@@ -1,6 +1,25 @@
 # 构造函数 Promise
 
-## forEach 中异步任务的执行
+## `then()` 方法
+
+```javascript
+const p = new Promise((resolve, reject) => {
+    resolve('成功……');
+    // reject('失败……');
+});
+// then 方法可以接收两个参数，这两个参数都是函数
+// then 方法的返回值是一个新的 promise 实例对象，状态是 pending
+const t = p.then((result) => {
+    // 当 promise 的状态是 fulfilled 时，执行
+}, (reason) => {
+    // 当 promise 的状态是 rejected 时，执行
+});
+
+// 正因为返回了一个新的 promise，所以能实现链式操作
+t.then().then().then()...
+```
+
+## `forEach` 中异步任务的执行
 
 ```javascript
 const arr = [1, 2, 3];
