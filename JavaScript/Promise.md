@@ -8,7 +8,7 @@ const p = new Promise((resolve, reject) => {
     // reject('失败……');
 });
 // then 方法可以接收两个参数，这两个参数都是函数
-// then 方法的返回值是一个新的 promise 实例对象，状态是 pending
+// then 方法的返回值是一个新的 promise 对象，状态是 pending
 const t = p.then((result) => {
     // 当 promise 的状态是 fulfilled 时，执行
 }, (reason) => {

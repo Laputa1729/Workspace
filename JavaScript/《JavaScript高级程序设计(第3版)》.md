@@ -146,3 +146,48 @@ Date.now() === +new Date(); // true
 
 -   `fn.call(this, arg1, arg2, ……)`
 -   `fn.apply(this, arguments)  <==> fn.apply(this, [arg1, arg2, ……])`
+
+### `new String()`
+
+```javascript
+var s1 = 'Laputa';
+var s2 = new String('Laputa');
+
+typeof s1; // 'string'
+typeof s2; // 'object'
+
+new Object(s1) instanceof String; // true
+s1 instanceof String; // false
+```
+
+-   ★`String.prototype.substring(beginIndex[, endIndex])` 比较特殊
+
+    -   如果 `beginIndex` 等于 `endIndex`，`substring()` 返回一个空字符串。
+    -   如果任一参数小于 `0` 或为 `NaN`，则被当作 `0`。
+    -   如果任一参数大于 `str.length`，则被当作 `str.length`。
+    -   如果 `beginIndex` 大于 `endIndex`，则两个参数调换位置。
+
+    ```javascript
+    var str = 'Laputa';
+
+    str.substring(3); // 'uta'
+    str.substring(3, 3); // ''
+    str.substring(-3, NaN); // ''
+    str.substring(9); // ''
+    str.substring(3, 0); // 'Lap'
+    ```
+
+### `new Boolean()`
+
+```javascript
+var value_false = false;
+var obj_false = new Boolean(false);
+
+value_false && true; // false
+obj_false && true; // true
+
+typeof value_false; // 'boolean'
+typeof obj_false; // 'object'
+```
+
+### `new Number()`
