@@ -191,3 +191,18 @@ typeof obj_false; // 'object'
 ```
 
 ### `new Number()`
+
+### 单体内置对象
+
+#### Global 对象
+
+#### Math 对象
+
+-   `Math.max()`
+    ```javascript
+    var arr = [1, 2, 3, 4, 5, 6, 7, 8];
+    var max = Math.max.apply(Math, arr);
+    console.log(max); // 8
+    ```
+
+## 第 6 章 面向对象
