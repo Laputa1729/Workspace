@@ -194,15 +194,43 @@ typeof obj_false; // 'object'
 
 ### 单体内置对象
 
-#### Global 对象
+-   Global 对象
 
-#### Math 对象
+-   Math 对象
 
--   `Math.max()`
-    ```javascript
-    var arr = [1, 2, 3, 4, 5, 6, 7, 8];
-    var max = Math.max.apply(Math, arr);
-    console.log(max); // 8
-    ```
+    -   `Math.max()`
+        ```javascript
+        var arr = [1, 2, 3, 4, 5, 6, 7, 8];
+        var max = Math.max.apply(Math, arr);
+        console.log(max); // 8
+        ```
 
 ## 第 6 章 面向对象
+
+### 创建对象
+
+-   工厂模式
+-   构造函数模式
+-   原型模式
+
+    > 注：对象字面量重写原型对象，切断了新原型与旧实例对象之间的联系。
+    > 逐条添加原型属性，却没有问题。
+
+    ```javascript
+    function Person() {
+        // ...
+    }
+
+    var p0 = new Person();
+    // 对象字面量重写原型对象
+    Person.prototype = {
+        constructor: Person,
+        name: 'Laputa',
+        age: '30',
+        sayHi: function () {
+            console.log('Hi, ', this.name);
+        },
+    };
+
+    p0.sayHi(); // caught TypeError: p0.sayHi is not a function.
+    ```
