@@ -222,7 +222,7 @@ typeof obj_false; // 'object'
     }
 
     var p0 = new Person();
-    // 对象字面量重写原型对象
+    // 用对象字面量方式重写原型对象
     Person.prototype = {
         constructor: Person,
         name: 'Laputa',
@@ -231,6 +231,6 @@ typeof obj_false; // 'object'
             console.log('Hi, ', this.name);
         },
     };
-
+    // 重写原型之后
     p0.sayHi(); // caught TypeError: p0.sayHi is not a function.
     ```
