@@ -164,3 +164,86 @@ test2();
 
 -   `forEach`/`map` 并发执行异步任务，不会按顺序执行。
 -   `for of` 和普通的 `for` 循环却能按顺序执行异步任务。
+
+
+## async / await
+
+- `async` 修饰的异步函数，它的返回值会自动包装为 `Promise`
+
+    ```Javascript
+    function fn1() {
+        return new Promise((resolve) => {
+            resolve(666);
+        });
+    }
+
+    async function fn2() {
+        return 666;
+    }
+
+    // fn1 与 fn2 完全等价
+    ```
+
+- 异步任务连续传值
+
+    > then 方式
+    ```Javascript
+    async function fn1() {
+        return 10;
+    }
+    async function fn2(num) {
+        return num + 2;
+    }
+    async function fn3(num) {
+        return num + 3;
+    }
+    async function fn4(num) {
+        return num + 4;
+    }
+
+    fn1()
+        .then(fn2)
+        .then(fn3)
+        .then(fn4)
+        .then(res => console.log('最终结果：', res))
+        .catch(e => console.log('出错了~~'));
+
+    console.log('End...');
+
+    // 结果：
+    // End...
+    // 最终结果： 19
+    ```
+
+    > await 方式
+    ```Javascript
+    async function fn1() {
+        return 10;
+    }
+    async function fn2(num) {
+        return num + 2;
+    }
+    async function fn3(num) {
+        return num + 3;
+    }
+    async function fn4(num) {
+        return num + 4;
+    }
+
+    async function getResult() {
+        let res = await fn1();
+        res = await fn2(res);
+        res = await fn3(res);
+        res = await fn4(res);
+
+        console.log('最终结果：', res);
+    }
+
+    getResult();
+
+    console.log('End...');
+
+    // 结果：
+    // End...
+    // 最终结果： 19
+    ```
