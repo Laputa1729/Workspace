@@ -234,3 +234,42 @@ typeof obj_false; // 'object'
     // 重写原型之后
     p0.sayHi(); // caught TypeError: p0.sayHi is not a function.
     ```
+
+### 继承
+
+原型链 + 构造函数：使用原型链实现对原型（属性&方法）的继承，借用构造函数实现对实例（属性）的继承。这样，既通过在原型上定义方法实现了函数的复用，又保证每个实例都有自己的私有属性。
+
+```javascript
+function SuperClass(name) {
+    this.name = name;
+    this.colors = ['red', 'blue', 'green'];
+}
+SuperClass.prototype.sayHi = function () {
+    console.log('Hi,', this.name);
+};
+
+function SubClass(name, age) {
+    SuperClass.call(this, name); // 继承属性，继承父类的 name 和 colors，而且还能传参
+    this.age = age;
+}
+// 继承方法
+SubClass.prototype = new SuperClass();
+// 私有方法
+SubClass.prototype.constructor = SubClass;
+SubClass.prototype.sayHello = function () {
+    console.log('Hello,' + this.age + '岁');
+};
+
+var _instance1 = new SubClass('Maxj', 30);
+_instance1.colors.push('yellow');
+
+console.log(_instance1.colors); // ['red', 'blue', 'green', 'yellow']
+_instance1.sayHi(); // Hi, Maxj
+_instance1.sayHello(); // Hello, 30岁
+
+var _instance2 = new SubClass('Laputa', '+ ∞ ');
+
+console.log(_instance2.colors); // ['red', 'blue', 'green']
+_instance2.sayHi(); // Hi, Laputa
+_instance2.sayHello(); // Hello, + ∞ 岁
+```
