@@ -273,3 +273,36 @@ console.log(_instance2.colors); // ['red', 'blue', 'green']
 _instance2.sayHi(); // Hi, Laputa
 _instance2.sayHello(); // Hello, + ∞ 岁
 ```
+
+## 第 7 章 函数表达式
+
+### 闭包
+
+**闭包**是指有权访问另一个函数作用域中的变量的**函数**。
+
+-   手动释放内存
+
+    ```javascript
+    function createComparisonFn(key) {
+        // 这个返回的匿名函数有权访问 key
+        return function (obj1, obj2) {
+            var _value1 = obj1[key];
+            var _value2 = obj2[key];
+
+            if (_value1 < _value2) {
+                return -1;
+            } else if (_value1 > _value2) {
+                return 1;
+            } else {
+                return 0;
+            }
+        };
+    }
+
+    // 创建函数
+    var compareName = createComparisonFn('name');
+    // 调用函数
+    compareName({ name: 'Laputa' }, { name: 'Maxj' });
+    // 解除对匿名函数的引用，释放内存
+    compareName = null;
+    ```
