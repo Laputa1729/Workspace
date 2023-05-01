@@ -306,3 +306,27 @@ _instance2.sayHello(); // Hello, + ∞ 岁
     // 解除对匿名函数的引用，释放内存
     compareName = null;
     ```
+
+## 第 22 章 高阶函数
+
+### 高级函数
+
+#### 类型检测
+
+```javascript
+function isArray(value) {
+    return Object.prototype.toString.call(value) === '[object Array]';
+}
+
+function isFunction(value) {
+    return Object.prototype.toString.call(value) === '[object Function]';
+}
+
+function isRegExp(value) {
+    return Object.prototype.toString.call(value) === '[object RegExp]';
+}
+```
+
+#### 作用域安全的构造函数
+
+-   当未使用 `new` 操作符来调用构造函数时，由于该 `this` 对象是在运行时绑定的，`this`会映射到全局对象 `window` 上。
