@@ -330,3 +330,33 @@ function isRegExp(value) {
 #### 作用域安全的构造函数
 
 -   当未使用 `new` 操作符来调用构造函数时，由于该 `this` 对象是在运行时绑定的，`this`会映射到全局对象 `window` 上。
+
+#### 函数柯里化
+
+> 官方的解释是：把接收多个参数的函数变换成只接后一个单一参数的函数，并返回接受余下的参数和结果的新函数的技术。
+> 就是把一个需要传递多参的函数转换成传单参的形式。
+
+```javascript
+(function () {
+    // 函数柯里化
+    function curry(fn) {
+        var args = Array.prototype.slice.call(arguments, 1);
+
+        return function () {
+            var innerArgs = Array.prototype.slice.call(arguments);
+            // var finalArgs = args.concat(innerArgs);
+            var finalArgs = [...args, ...innerArgs];
+
+            return fn.apply(null, finalArgs);
+        };
+    }
+
+    function add(num1, num2) {
+        return num1 + num2;
+    }
+
+    var curriedAdd = curry(add, 5, 12);
+
+    console.log(curriedAdd(3)); // 17
+})();
+```
