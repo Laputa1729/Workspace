@@ -6,15 +6,15 @@
 
 ```javascript
 (function () {
-    var str = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.';
-    var positionArr = [];
-    var pos = str.indexOf('e');
+  var str = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.';
+  var positionArr = [];
+  var pos = str.indexOf('e');
 
-    while (pos > -1) {
-        positionArr.push(pos);
-        pos = str.indexOf('e', pos + 1);
-    }
+  while (pos > -1) {
+    positionArr.push(pos);
+    pos = str.indexOf('e', pos + 1);
+  }
 
-    console.log(positionArr); // [3, 24, 32, 35, 52]
+  console.log(positionArr); // [3, 24, 32, 35, 52]
 })();
 ```
