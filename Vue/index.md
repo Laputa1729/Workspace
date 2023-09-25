@@ -27,7 +27,7 @@
 - 子组件
 
 ```vue
-<!--子组件Child.vue-->
+<!--子组件Child-->
 <template>
   <div>
     <p>{{ modifiedProp }}</p>
